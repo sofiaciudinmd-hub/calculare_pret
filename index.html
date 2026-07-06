@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator Pret</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input, button { margin: 5px; padding: 10px; }
+    </style>
+</head>
+<body>
+
+<h2>Calculator Pret</h2>
+
+<input type="number" id="nr" placeholder="Introdu numarul">
+
+<br><br>
+
+<button onclick="calculeaza(10.5)">10.5%</button>
+<button onclick="calculeaza(11)">11%</button>
+<button onclick="calculeaza(11.5)">11.5%</button>
+<button onclick="calculeaza(12)">12%</button>
+
+<h3 id="net">Pret net: 0</h3>
+<h3 id="comision">Comision: 0</h3>
+<h3 id="brut">Pret brut: 0</h3>
+
+<script>
+function calculeaza(procent) {
+    let nr = parseFloat(document.getElementById("nr").value);
+
+    if (isNaN(nr)) return;
+
+    let pretNet = nr - nr * (procent / 100);
+
+    let comision = 0;
+
+    if (pretNet <= 599) comision = 50;
+    else if (pretNet <= 699) comision = 60;
+    else if (pretNet <= 799) comision = 70;
+    else if (pretNet <= 999) comision = 80;
+    else if (pretNet <= 1999) comision = 90;
+    else if (pretNet <= 3999) comision = 100;
+    else if (pretNet <= 5999) comision = 150;
+    else if (pretNet < 7499) comision = 200;
+    else comision = 250;
+
+    let pretBrut = pretNet + comision;
+
+    document.getElementById("net").innerText = "Pret net: " + Math.round(pretNet);
+    document.getElementById("comision").innerText = "Comision: " + comision;
+    document.getElementById("brut").innerText = "Pret brut: " + Math.round(pretBrut);
+}
+</script>
+
+</body>
+</html>
